@@ -1,0 +1,25 @@
+{
+    "citys": {
+        "len": 5,
+        "names": [
+            "中国_北京_北京",
+            "中国_天津_天津",
+            "中国_上海_上海",
+            "中国_深圳_深圳",
+            "中国_重庆_重庆",
+            "中国_河北_石家庄",
+            "中国_辽宁_沈阳",
+            "中国_黑龙江_哈尔滨",
+            "中国_浙江_杭州",
+            "中国_福建_福州",
+            "中国_山东_济南"
+        ]
+    },
+    "email": {
+        "from_addr": "king.ye@blueforce-tech.com",
+        "password": "QQdemima1",
+        "to_addr": "1160123318@qq.com",
+        "smtp_server": "smtp.qq.com",
+        "smtp_port": 25
+    }
+}
