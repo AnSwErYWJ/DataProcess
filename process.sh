@@ -55,7 +55,7 @@ cd ../$dir_name
 start_time=$(date +%s)
 for log in var/www/neo/logs/*.log
 do
- 	/usr/local/bin/python3 ../data_process/jsontransform.py $log
+ 	/usr/local/bin/python3 ../data_process/jsontransform.py $log config
 done
 end_time=$(date +%s)
 total_time=`expr $end_time - $start_time`
