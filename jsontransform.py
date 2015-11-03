@@ -5,6 +5,7 @@ import time, datetime
 import shutil
 import traceback
 import logging, logging.handlers
+import encodings.idna
 
 from email import encoders
 from email.header import Header
@@ -211,7 +212,10 @@ class Send_mail(object):
         self.password = config['password']#发送者邮箱密码
         self.to_addr = config['to_addr']#接收者的邮箱
         self.smtp_server = config['smtp_server']#邮箱服务器
-        self.smtp_port = config['smtp_port']##邮箱服务器端口
+        # self.smtp_port = config['smtp_port']##邮箱服务器端口
+        # print(config)
+        # quit()
+
         self.content=""
         self.msg=""
 
@@ -227,7 +231,7 @@ class Send_mail(object):
         self.msg['Subject'] = Header('Something happendd', 'utf-8').encode()
 
     def send_email(self):
-        server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+        server = smtplib.SMTP(self.smtp_server, 25)
         server.set_debuglevel(1)
         server.login(self.from_addr, self.password)
         server.sendmail(self.from_addr, [self.to_addr], self.msg.as_string())
@@ -279,9 +283,10 @@ def do_once(log_file, config_file):
 
         tool.endtime = datetime.datetime.now()
         total_seconds=(tool.endtime - tool.starttime).total_seconds()
-        time_cost_str= '\n一共耗时: '+str(total_seconds//60)+' 分 '+str(total_seconds%60)+' 秒 '
+        # time_cost_str= '\n一共耗时: '+str(total_seconds//60)+' 分 '+str(total_seconds%60)+' 秒 '
+        content="文件解析成功  "
         a=Send_mail(config['email'])
-        a.create_mail('文件解析成功 '+tool.inputfilename+time_cost_str)
+        a.create_mail(content)
         a.send_email()
         logger = Logger(logname=tool.destination_folder+'/LOG.txt', loglevel=1, logger='ex').getlog().info('FILE: <'+log_file+'> SUCCESS')
 
@@ -303,7 +308,11 @@ def do_once(log_file, config_file):
 
 # t.join()
 
-
+# config_file=sys.argv[2]
+# config=get_config(config_file)
+# a=Send_mail(config['email'])
+# a.create_mail(content)
+# a.send_email()
 # quit()
 
 if len(sys.argv) != 3:
